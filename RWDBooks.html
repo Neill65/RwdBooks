@@ -1,0 +1,101 @@
+<head>
+  <title>RWDBooks</title>
+</head>
+
+<body>
+<div style="float : right ; margin-right:20px;" >
+
+<!--add login buttons-->
+	{{ loginButtons align="right"}}
+</div>
+
+<!--add app name , print categories-->
+<div id="RWDBooks">  
+	<div style="height:59px;">
+		<h1>
+			<a href="RWDBooks.html" target="_parent" onfocus="blur();" title="Bushido" style="text-decoration: none">
+				<span >
+					<font style="color:#00ff01;font-size:59px;font-family:AvenirHeavy;">Bushido</font>
+				</span>
+			</a>
+		</h1>  
+	
+	<div id="categories-container">
+			{{>categories}}
+	</div>
+	<div id="list">
+		{{> list}}
+	</div>
+</div>
+
+	
+	<!--display additional options -->
+	<div id="sidecolumn">
+				
+			<div class="Mymenu_home titles_menu" style="position:absolute;left:20px;top:140px;" >
+			<a href="x&o.html" style="text-decoration: none"><font style="color:#3e3e40;font-size:17px;font-family:AvenirHeavy;">X & Os</font></a><br>
+			<a href="https://www.facebook.com/profile.php?id=100005763641719" style="float:left; margin-left: 1px; margin-top: 8px" ><img src="fb.jpg" width="16" height="16" border="0" id="facebook"/></a>
+			<a href="https://twitter.com/BushidoWebStudi" style="float:left; margin-left: 1px; margin-top: 8px" ><img src="tw.gif" width="16" height="16" border="0" id="twitter"/></a><br>
+			
+		</div>
+		
+	
+	
+	<!--App description-->
+	<div style="position:absolute;left:252px;top:124px;width:140px;">
+		<p><font style="color:#3e3e40;font-size:11px;font-family:Arial;"> Bushido is my web development project which provides users
+																									  with a sleek and easy to use interface where they can publish their recommended books 
+																									  with other users or play one of our games through their 
+																									  accounts or as a guest. Feel free to browse the
+																									  site and sign up to our newsletter
+			</font>
+		</p>
+	</div>
+	
+</body>
+
+
+<template name="categories">
+
+	<div id="categories" class="btn-group" btn btn-inverse">
+		{{#if new_cat}}
+			<div class="category">
+				<input type="text" id="add-category" value="" />
+			</div>
+
+		{{else}}
+		<!--add new category-->
+		<div class="category btn btn-inverse" id="btnNewCat">&plus;</div>
+		{{/if}}
+			{{#each lists}}
+		
+			<div class="category btn {{list_status}}" id="{{_id}} ">
+				{{Category}}
+			</div>
+			{{/each}}
+	</div>
+</template>
+
+<!--open categories-->
+<template name="list">
+	<ul id="Rating_list">
+		{{#each items}}
+			<li class="Rating_book alert">
+				<button type="button" class="close delete_book" id="{{Name}}">X</button>
+				{{Name}}
+				{{#if Rating_editing}}
+				<input type="text" id="edit_Rating" class="span2 pull-right" value=""/>
+				{{else}}
+				<div class="Rating pull-right label {{RatingClass}}">{{Rating}}</div>
+				{{/if}}
+			</li>
+			{{/each}}
+			{{#if list_selected}}
+			<li class="alert-success" id="btnAddItem">&plus;
+				{{#if list_adding}}
+				<input class="span4" id="book_to_add" size="32" type="text">
+				{{/if}}
+			</li>
+		{{/if}}
+	</ul>
+</template>
